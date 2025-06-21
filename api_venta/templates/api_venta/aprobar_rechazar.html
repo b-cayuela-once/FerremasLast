@@ -17,7 +17,7 @@
           <h3>Pedido #{{ pedido.id }}</h3>
 
           <div class="pedido-detalles">
-            <p><strong>Cliente:</strong> {{ pedido.usuario.username }}</p>
+            <p><strong>Cliente:</strong> {{ pedido.usuario.nombre }}</p>
             <p><strong>Total:</strong> ${{ pedido.total }}</p>
             <p><strong>Despacho:</strong> {{ pedido.despacho|yesno:"Sí,No" }}</p>
             <p><strong>Estado:</strong> 

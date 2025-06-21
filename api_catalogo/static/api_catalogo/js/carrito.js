@@ -88,6 +88,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
     contenedor.appendChild(controlDespacho);
 
+    // ✅ Aquí escuchamos cambios en el checkbox de despacho
+    const toggle = document.getElementById('toggle-despacho');
+    if (toggle) {
+      toggle.addEventListener('change', async (e) => {
+        despachoActivado = e.target.checked;
+        await guardarCarrito();
+        renderCarrito();
+        actualizarBotonPago();
+      });
+    }
+
     const valorDespacho = despachoActivado ? 5000 : 0;
     const resumen = document.createElement('div');
     resumen.classList.add('total-carrito');
@@ -109,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const msg = document.createElement('p');
       msg.textContent = "✅ El carrito ha sido desbloqueado. Favor proceder a pagar";
       msg.style.marginTop = '15px';
-      msg.style.color = '#28a745';  // Verde
+      msg.style.color = '#28a745';
       msg.style.fontWeight = 'bold';
       msg.style.textAlign = 'center';
       contenedor.appendChild(msg);
@@ -123,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       btnPago.disabled = false;
       btnPago.textContent = 'Proceder al pago';
       btnPago.onclick = () => {
-        window.location.href = '/api/usuario/signup-form'; // Cambiar por ruta real de pago luego
+        window.location.href = '/api/usuario/signup-form'; // 🔁 reemplaza por tu ruta real de pago
       };
     } else if (pedidoRechazado) {
       btnPago.disabled = false;

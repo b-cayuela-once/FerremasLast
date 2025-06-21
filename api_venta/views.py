@@ -27,9 +27,10 @@ def lista_vendedor(request):
 
 @login_required
 def aprobar_rechazar(request):
-    pedidos = Pedido.objects.filter(
+    pedidos = Pedido.objects.select_related('usuario').filter(
         Q(aprobado__isnull=True) | Q(aprobado=True, entregado=False)
     ).order_by('-fecha')
+
     return render(request, 'api_venta/aprobar_rechazar.html', {'pedidos': pedidos})
 
 def bodeguero_site(request):

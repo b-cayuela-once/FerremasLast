@@ -59,7 +59,7 @@ function cambiarCantidad(id, cambio) {
 
 async function agregarAlCarrito(id, nombre, precio, imagen) {
   if (carritoBloqueado) {
-    alert("El carrito está bloqueado. No puedes agregar productos.");
+    alert("🔒 El carrito está bloqueado. No puedes agregar productos.");
     return;
   }
 
@@ -86,6 +86,14 @@ async function agregarAlCarrito(id, nombre, precio, imagen) {
       })
     });
 
+    if (!res.ok) {
+      if (res.status === 403) {
+        throw new Error("⚠️ Debes iniciar sesión para agregar productos al carrito.");
+      } else {
+        throw new Error("❌ Error desconocido al guardar el carrito.");
+      }
+    }
+
     const resultado = await res.json();
     if (resultado.status === 'ok') {
       alert(`${cantidad} unidad(es) de "${nombre}" agregado(s) al carrito.`);
@@ -93,11 +101,11 @@ async function agregarAlCarrito(id, nombre, precio, imagen) {
       const span = document.getElementById(`cantidad-${id}`);
       if (span) span.textContent = 1;
     } else {
-      alert("Error al guardar el carrito.");
+      alert("❌ Error al guardar el carrito.");
     }
   } catch (err) {
     console.error('Error al guardar en backend:', err);
-    alert("No se pudo guardar el carrito.");
+    alert(err.message);
   }
 }
 
