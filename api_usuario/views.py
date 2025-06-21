@@ -11,6 +11,8 @@ from .serializers import (
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 
+
+
 # ----------------------------------------------- #
 # / TEMPLATES API.
 # ----------------------------------------------- #
@@ -129,3 +131,13 @@ def welcome_staff_template(request):
 # api_usuario/create-staff.html
 def create_staff_template(request):
     return render(request, 'api_usuario/create-staff.html')
+
+
+
+
+
+
+
+
+
+

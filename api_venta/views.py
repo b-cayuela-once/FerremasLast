@@ -148,3 +148,53 @@ def rechazar_pedido(request, pedido_id):
 
         return redirect('aprobar_rechazar')
     return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# API WEBPAY.
+from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import uuid
+
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+# Crear instancia y configurarla para testing
+transaction = Transaction()
+transaction.configure_for_testing()
+
+def iniciar_pago(request):
+    buy_order = str(uuid.uuid4())[:8]
+    session_id = str(uuid.uuid4())
+    amount = 1000  # monto ejemplo
+    return_url = request.build_absolute_uri('/api/venta/webpay-respuesta/')
+
+    response = transaction.create(buy_order, session_id, amount, return_url)
+    return redirect(response['url'] + '?token_ws=' + response['token'])
+
+@csrf_exempt
+def webpay_respuesta(request):
+    token = request.POST.get('token_ws') or request.GET.get('token_ws')
+    if not token:
+        return HttpResponse("Token no encontrado", status=400)
+
+    response = transaction.commit(token)
+
+    # Acceder al estado en el dict
+    if response.get('status') == 'AUTHORIZED':
+        return render(request, 'api_venta/pago_exitoso.html', {'response': response})
+    else:
+        return render(request, 'api_venta/pago_rechazado.html', {'response': response})

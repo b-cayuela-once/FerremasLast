@@ -19,4 +19,8 @@ urlpatterns = [
     path('actualizar_carrito/', views.actualizar_carrito, name='actualizar_carrito'),
     path('crear_pedido/', views.crear_pedido, name='crear_pedido'),
     
+    # VISTA WEBPAY.
+    path('pagar/', views.iniciar_pago, name='iniciar_pago'),
+    path('webpay-respuesta/', views.webpay_respuesta, name='webpay_respuesta'),
+    
 ]
