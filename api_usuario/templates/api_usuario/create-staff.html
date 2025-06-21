@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario Staff</title>
+    <link rel="stylesheet" href="{% static 'api_usuario/css/create-staff.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Crear Usuario Staff</h2>
+        <form id="create-staff-form">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            <select id="tipo_usuario" name="tipo_usuario" required>
+                <option value="" disabled selected hidden>Tipo de Usuario</option>
+                <option value="vendedor">Vendedor</option>
+                <option value="bodeguero">Bodeguero</option>
+                <option value="contador">Contador</option>
+            </select>
+            <button type="submit">Crear Usuario</button>
+        </form>
+        <p id="respuesta" class="mensaje"></p>
+        <a href="{% url 'admin_site' %}" class="back-button">🔙 Volver al Panel de Administración</a>
+
+    </div>
+    <script src="{% static 'api_usuario/js/create-staff.js' %}"></script>
+</body>
+</html>

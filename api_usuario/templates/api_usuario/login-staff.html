@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Staff</title>
+  <link rel="stylesheet" href="{% static 'api_usuario/css/login-staff.css' %}">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login Staff</h2>
+    <form id="loginStaffForm">
+        <input type="text" id="nombre" placeholder="Nombre usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p id="mensaje"></p>
+
+    <!-- Botón para cancelar -->
+    <a href="/" class="cancel-btn">← Cancelar</a>
+  </div>
+
+  <script src="{% static 'api_usuario/js/login-staff.js' %}"></script>
+</body>
+</html>

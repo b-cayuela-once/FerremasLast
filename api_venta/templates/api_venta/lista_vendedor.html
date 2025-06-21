@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="{% static 'api_venta/css/lista_vendedor.css' %}">
+</head>
+<body>
+
+    <h1>Lista de Productos Disponibles</h1>
+    <ul>
+      {% for producto in productos %}
+        <li>
+          <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-img">
+          <span>{{ producto.nombre }}</span>
+          <span>${{ producto.precio }}</span> 
+        </li>
+      {% empty %}
+        <li><span>No hay productos disponibles.</span></li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'vendedor_site' %}" class="back-button">🔙 Volver al Panel de Vendedor</a>
+
+</body>
+</html>

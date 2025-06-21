@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Cliente</title>
+    <link rel="stylesheet" href="{% static 'api_usuario/css/signup.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>- Crear Cuenta -</h2>
+        <form id="signupForm">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="direccion" placeholder="Dirección" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+        <div id="mensaje"></div>
+
+        <!-- Botón cancelar -->
+        <a href="/" class="cancel-btn">← Cancelar</a>
+    </div>
+    <script src="{% static 'api_usuario/js/signup.js' %}"></script>
+</body>
+</html>

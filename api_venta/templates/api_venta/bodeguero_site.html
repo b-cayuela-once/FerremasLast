@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bodeguero - Pedidos</title>
+  <link rel="stylesheet" href="{% static 'api_venta/css/bodeguero_site.css' %}">
+</head>
+<body>
+
+<h1>Pedidos Aprobados</h1>
+
+{% if pedidos %}
+  <div class="contenedor-pedidos">
+    {% for pedido in pedidos %}
+      <div class="card-pedido">
+        <h3>Pedido #{{ pedido.id }}</h3>
+        <p><strong>Cliente:</strong> {{ pedido.usuario.nombre }}</p>
+        <p><strong>Total:</strong> ${{ pedido.total }}</p>
+        <p><strong>Despacho:</strong> {{ pedido.despacho|yesno:"Sí,No" }}</p>
+        <p><strong>Estado:</strong> {{ pedido.estado }}</p>
+
+        <ul>
+          {% for item in pedido.productos %}
+            <li>{{ item.cantidad }}x {{ item.nombre }} - ${{ item.precio }}</li>
+          {% endfor %}
+        </ul>
+
+        {% if not pedido.preparado %}
+          <form method="post" action="{% url 'preparar_pedido' pedido.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-preparar">Preparar pedido</button>
+          </form>
+        {% else %}
+          {% if pedido.despacho %}
+            <button disabled class="btn-despacho">Despacho para vendedor</button>
+          {% else %}
+            <button disabled class="btn-retiro">Retiro en tienda</button>
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="mensaje-vacio">No hay pedidos aprobados.</p>
+{% endif %}
+
+</body>
+</html>

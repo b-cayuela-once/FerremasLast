@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FerreMas+</title>
+  <link rel="stylesheet" href="{% static 'api_catalogo/css/catalogo.css' %}">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="inicio">
+    <nav class="navbar">
+      <div class="logo" onclick="location.href='/'" style="cursor: pointer;">FerreMas+</div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#socios">Socios</a></li>
+        <li><a href="#carrera">Carrera</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="nav-actions">
+        {% if user.is_authenticated %}
+          <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login-form' %}"><button>Ingresar</button></a>
+          <a href="{% url 'signup-form' %}"><button>Unirse</button></a>
+        {% endif %}
+        <button class="carrito" onclick="location.href='/api/catalogo/carrito/'">🛒</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- BUSCADOR -->
+  <section class="buscador">
+    <input type="text" id="busqueda-input" placeholder="Busca productos, herramientas..." oninput="buscar()" />
+  </section>
+
+  <!-- CATÁLOGO DINÁMICO -->
+  <section id="catalogo" class="catalogo">
+    <h2>Catálogo de Productos</h2>
+    <div class="productos" id="productos">
+      <!-- Aquí se renderizan dinámicamente las tarjetas -->
+    </div>
+  </section>
+
+  <!-- SOCIOS -->
+  <section id="socios" class="socios">
+    <h2>Socios</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="{% static 'api_catalogo/img/SOCIOS.jpeg' %}" alt="Socio 1" />
+        <p>Ferretería del Sur</p>
+      </div>
+      <div class="card">
+        <img src="{% static 'api_catalogo/img/SOCIOS.jpeg' %}" alt="Socio 2" />
+        <p>Ferretería del Sur</p>
+      </div>
+      <div class="card">
+        <img src="{% static 'api_catalogo/img/SOCIOS.jpeg' %}" alt="Socio 3" />
+        <p>Ferretería del Sur</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRERA -->
+  <section id="carrera" class="carrera">
+    <div class="texto">
+      <h2>Nuestra Carrera</h2>
+      <p>Desde nuestros humildes comienzos en un pequeño galpón...</p>
+    </div>
+    <div class="imagen">
+      <img src="{% static 'api_catalogo/img/HISTORIA.png' %}" alt="Historia Ferremas" />
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="footer-container">
+      <div class="footer-column"><h4>📍 Dirección</h4><p>Av. Herramienta 123<br>Santiago, Chile</p></div>
+      <div class="footer-column"><h4>📞 Teléfono</h4><p>+56 9 1234 5678</p></div>
+      <div class="footer-column"><h4>📧 Email</h4><p><a href="mailto:contacto@ferremas.cl">contacto@ferremas.cl</a></p></div>
+      <div class="footer-column"><h4>🕒 Horarios</h4><p>Lunes a Sábado<br>8:00 a 18:00</p></div>
+      <div>
+        <p>Si eres uno de nuestros trabajadores ...</p>
+        <a href="{% url 'login-form-staff' %}"><button>Ingresar Staff</button></a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 Ferremas. Todos los derechos reservados.</p></div>
+  </footer>
+
+  <!-- JS -->
+  <script src="{% static 'api_catalogo/js/catalogo.js' %}"></script>
+  <script>
+    window.userId = "{{ request.user.nombre|default:'anonimo' }}";
+  </script>
+</body>
+</html>

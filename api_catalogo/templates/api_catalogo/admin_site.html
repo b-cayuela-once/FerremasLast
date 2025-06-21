@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Administrador</title>
+  <link rel="stylesheet" href="{% static 'api_catalogo/css/admin_site.css' %}">
+</head>
+<body>
+  <div class="admin-panel">
+    <h1>Bienvenido Administrador</h1>
+    <h2>¿Qué desea hacer hoy?</h2>
+
+    <div class="options">
+      <a class="option-btn" href="{% url 'create-staff-form' %}">➕ Crear Staff</a>
+      <a class="option-btn" href="{% url 'lista_productos' %}">🛠️ Crear Producto</a>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+
+
+  </div>
+</body>
+</html>

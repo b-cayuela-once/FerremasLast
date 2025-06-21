@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Pedidos Pendientes</title>
+    <link rel="stylesheet" href="{% static 'api_venta/css/aprobar_rechazar.css' %}" />
+</head>
+<body>
+
+  <h1>Gestión de Pedidos</h1>
+
+  {% if pedidos %}
+    <div class="contenedor-pedidos">
+      {% for pedido in pedidos %}
+        <div class="card-pedido">
+          <h3>Pedido #{{ pedido.id }}</h3>
+
+          <div class="pedido-detalles">
+            <p><strong>Cliente:</strong> {{ pedido.usuario.username }}</p>
+            <p><strong>Total:</strong> ${{ pedido.total }}</p>
+            <p><strong>Despacho:</strong> {{ pedido.despacho|yesno:"Sí,No" }}</p>
+            <p><strong>Estado:</strong> 
+              {% if pedido.aprobado == None %}
+                Pendiente
+              {% elif pedido.aprobado %}
+                {% if pedido.entregado %}
+                  Entregado
+                {% elif pedido.preparado %}
+                  Preparado
+                {% else %}
+                  Aprobado
+                {% endif %}
+              {% else %}
+                Rechazado
+              {% endif %}
+            </p>
+            <p><strong>Fecha:</strong> {{ pedido.fecha|date:"d/m/Y H:i" }}</p>
+          </div>
+
+          <div class="pedido-productos">
+            <h4>Productos:</h4>
+            <ul>
+              {% for item in pedido.productos %}
+                <li>
+                  <span>{{ item.cantidad }}x {{ item.nombre }}</span>
+                  <span>${{ item.precio|floatformat:0 }}</span>
+                </li>
+              {% empty %}
+                <li>No hay productos en este pedido.</li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="acciones-pedido">
+            {% if pedido.aprobado == None %}
+              <form method="post" action="{% url 'aprobar_pedido' pedido.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-aprobar">Aprobar</button>
+              </form>
+              <form method="post" action="{% url 'rechazar_pedido' pedido.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-rechazar">Rechazar</button>
+              </form>
+            {% elif pedido.aprobado and pedido.preparado and not pedido.entregado %}
+              <form method="post" action="{% url 'confirmar_entrega' pedido.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-aprobar">Confirmar Entrega</button>
+              </form>
+            {% elif pedido.entregado %}
+              <p><strong>Pedido entregado al cliente.</strong></p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="mensaje-vacio">No hay pedidos pendientes.</p>
+  {% endif %}
+
+</body>
+</html>

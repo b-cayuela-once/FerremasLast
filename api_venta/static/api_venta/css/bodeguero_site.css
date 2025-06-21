@@ -1,0 +1,71 @@
+body {
+  background-color: #202020;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #dc0c19;
+}
+
+.contenedor-pedidos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card-pedido {
+  background-color: #2b2b2b;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(220, 12, 25, 0.4);
+}
+
+.card-pedido h3 {
+  color: #dc0c19;
+}
+
+.card-pedido p,
+.card-pedido li {
+  font-size: 0.9rem;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-preparar {
+  background-color: #dc0c19;
+  color: #fff;
+}
+
+.btn-preparar:hover {
+  background-color: #a60b14;
+}
+
+.btn-despacho,
+.btn-retiro {
+  background-color: #888;
+  color: #111;
+  cursor: not-allowed;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  font-size: 18px;
+  color: #ccc;
+}

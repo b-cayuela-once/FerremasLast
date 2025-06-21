@@ -1,0 +1,103 @@
+body {
+  background: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.form-container {
+  background: #ffffff15;
+  padding: 50px 50px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 15px 15px rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  padding: 14px 16px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background: transparent;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.form-container input::placeholder {
+  color: #ddd;
+}
+
+.form-container input:focus {
+  border-color: #5b8def;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-container button {
+  padding: 14px;
+  margin-top: 10px;
+  background-color: #d13a3a;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.35);
+}
+
+.form-container button:hover {
+  background-color: #a92a2a;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#mensaje {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+  min-height: 1.2rem;
+  font-weight: 600;
+  color: #e74c3c;
+}
+
+.cancel-btn {
+  display: inline-block;
+  margin-top: 15px;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  color: #fff;
+  text-decoration: underline;
+}

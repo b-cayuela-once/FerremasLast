@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
+
+.titulo {
+  text-align: center;
+  padding: 20px;
+  color: #dc0c19;
+}
+
+.contenedor-carrito {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.producto-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+}
+
+.detalle-producto {
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.precio {
+  color: #dc0c19;
+  font-weight: bold;
+}
+
+.cantidad-controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cantidad-controles button {
+  background-color: #dc0c19;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.total-carrito {
+  text-align: right;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.acciones-carrito {
+  text-align: center;
+  margin: 30px;
+}
+
+.acciones-carrito button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #dc0c19;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+.info-producto {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.info-producto img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.2);
+}
+
+.control-despacho {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #1a1a1a;
+  border-radius: 6px;
+  color: #ffffff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.control-despacho input[type="checkbox"] {
+  accent-color: #dc0c19;
+  margin-right: 10px;
+}
+
+.total-carrito p {
+  margin: 5px 0;
+}
