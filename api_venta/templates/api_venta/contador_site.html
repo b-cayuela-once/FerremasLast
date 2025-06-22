@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Pagos</title>
+  <link rel="stylesheet" href="{% static 'api_venta/css/contador_site.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Detalle de Pagos Registrados</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Despacho</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pago in pagos %}
+        <tr>
+          <td>#{{ pago.id }}</td>
+          <td>{{ pago.usuario }}</td>
+          <td>{{ pago.fecha_pago|date:"d-m-Y H:i" }}</td>
+          <td>${{ pago.total_pagado }}</td>
+          <td>{% if pago.despacho %}Sí{% else %}No{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7">No hay pagos registrados.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

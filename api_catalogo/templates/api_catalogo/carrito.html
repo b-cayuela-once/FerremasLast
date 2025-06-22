@@ -8,14 +8,11 @@
 </head>
 <body>
   <h1 class="titulo">Carrito de Compras</h1>
-
   <div id="carrito-contenido" class="contenedor-carrito"></div>
-
   <div class="acciones-carrito">
     <button id="pago-btn">Proceder al pago</button>
     <button onclick="location.href='/api/catalogo/catalogo/'">Seguir comprando</button>
   </div>
-
   <script src="{% static 'api_catalogo/js/carrito.js' %}"></script>
   <script>
     window.userId = "{{ request.user.nombre|default:'anonimo' }}";

@@ -1,13 +1,25 @@
-let carrito = [];
-let carritoBloqueado = false;
-let despachoActivado = false;
-let cantidades = {};
+// =======================================================
+// 🛍️ CATÁLOGO DE PRODUCTOS - CLIENTE
+// Script para mostrar productos, cambiar cantidades y 
+// agregar al carrito con control de bloqueo.
+// =======================================================
 
-// Al cargar productos del catálogo
+// =========================
+// 🔧 Variables globales
+// =========================
+let carrito = [];                 // Productos actuales en el carrito
+let carritoBloqueado = false;     // Si el carrito está bloqueado
+let despachoActivado = false;     // Si se activó despacho
+let cantidades = {};              // Cantidades seleccionadas por producto
+
+// =========================
+// 📦 Cargar productos del catálogo y mostrarlos
+// =========================
 fetch('/api/catalogo/api/')
   .then(response => response.json())
   .then(productos => {
     const contenedor = document.getElementById('productos');
+
     productos.forEach(p => {
       const card = document.createElement('div');
       card.className = 'producto';
@@ -30,14 +42,14 @@ fetch('/api/catalogo/api/')
     console.error('Error cargando productos:', error);
   });
 
-// Obtener carrito del backend al iniciar
+// =========================
+// 🛒 Obtener carrito del backend al iniciar
+// =========================
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const response = await fetch('/api/venta/obtener_carrito/', {
       method: 'GET',
-      headers: {
-        'X-CSRFToken': getCookie('csrftoken')
-      }
+      headers: { 'X-CSRFToken': getCookie('csrftoken') }
     });
     const data = await response.json();
     carrito = data.productos || [];
@@ -48,6 +60,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// =========================
+// ➕➖ Cambiar cantidad seleccionada de un producto
+// =========================
 function cambiarCantidad(id, cambio) {
   if (!(id in cantidades)) cantidades[id] = 1;
   cantidades[id] += cambio;
@@ -57,6 +72,9 @@ function cambiarCantidad(id, cambio) {
   if (span) span.textContent = cantidades[id];
 }
 
+// =========================
+// 🧺 Agregar producto al carrito (con validación)
+// =========================
 async function agregarAlCarrito(id, nombre, precio, imagen) {
   if (carritoBloqueado) {
     alert("🔒 El carrito está bloqueado. No puedes agregar productos.");
@@ -65,6 +83,7 @@ async function agregarAlCarrito(id, nombre, precio, imagen) {
 
   const cantidad = cantidades[id] || 1;
 
+  // Verificar si el producto ya está en el carrito
   const existente = carrito.find(p => p.id === id);
   if (existente) {
     existente.cantidad += cantidad;
@@ -86,6 +105,7 @@ async function agregarAlCarrito(id, nombre, precio, imagen) {
       })
     });
 
+    // Verificar si la petición fue exitosa
     if (!res.ok) {
       if (res.status === 403) {
         throw new Error("⚠️ Debes iniciar sesión para agregar productos al carrito.");
@@ -109,7 +129,9 @@ async function agregarAlCarrito(id, nombre, precio, imagen) {
   }
 }
 
-// Función CSRF
+// =========================
+// 🍪 Obtener valor de cookie CSRF
+// =========================
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {

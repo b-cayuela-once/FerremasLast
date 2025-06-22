@@ -7,10 +7,8 @@
     <link rel="stylesheet" href="{% static 'api_catalogo/css/lista.css' %}">
 </head>
 <body>
-
     <h1>Lista de Productos</h1>
     <a href="{% url 'crear_producto' %}">➕ Agregar nuevo producto</a>
-
     <ul>
       {% for producto in productos %}
         <li>
@@ -24,9 +22,6 @@
         <li><span>No hay productos disponibles.</span></li>
       {% endfor %}
     </ul>
-
     <a href="{% url 'admin_site' %}" class="back-button">🔙 Volver al Panel de Administración</a>
-
-
 </body>
 </html>

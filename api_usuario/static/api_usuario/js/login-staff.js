@@ -44,10 +44,14 @@ document.getElementById('loginStaffForm').addEventListener('submit', async funct
         setTimeout(() => {
           const tipo = data.tipo_usuario?.toLowerCase(); // Asegura que esté en minúsculas
           
-          if (tipo === 'administrador' || tipo === 'contador') {
+          if (tipo === 'administrador') {
             window.location.href = '/api/catalogo/admin_site/';
-          } else if (tipo === 'vendedor' || tipo === 'bodeguero') {
-            window.location.href = '/api/catalogo/lista/';
+          } else if (tipo === 'vendedor') {
+            window.location.href = '/api/venta/vendedor_site/';
+          } else if (tipo === 'bodeguero') {
+            window.location.href = '/api/venta/bodeguero_site/';
+          } else if (tipo === 'contador') {
+            window.location.href = '/api/venta/contador_site/';
           } else {
             mensajeDiv.style.color = "red";
             mensajeDiv.textContent = "Tipo de usuario no reconocido.";

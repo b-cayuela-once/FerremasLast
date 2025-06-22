@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="{% static 'api_catalogo/css/catalogo.css' %}">
 </head>
 <body>
-
-  <!-- HEADER -->
   <header id="inicio">
     <nav class="navbar">
       <div class="logo" onclick="location.href='/'" style="cursor: pointer;">FerreMas+</div>
@@ -35,21 +33,14 @@
       </div>
     </nav>
   </header>
-
-  <!-- BUSCADOR -->
   <section class="buscador">
     <input type="text" id="busqueda-input" placeholder="Busca productos, herramientas..." oninput="buscar()" />
   </section>
-
-  <!-- CATÁLOGO DINÁMICO -->
   <section id="catalogo" class="catalogo">
     <h2>Catálogo de Productos</h2>
     <div class="productos" id="productos">
-      <!-- Aquí se renderizan dinámicamente las tarjetas -->
     </div>
   </section>
-
-  <!-- SOCIOS -->
   <section id="socios" class="socios">
     <h2>Socios</h2>
     <div class="cards">
@@ -67,8 +58,6 @@
       </div>
     </div>
   </section>
-
-  <!-- CARRERA -->
   <section id="carrera" class="carrera">
     <div class="texto">
       <h2>Nuestra Carrera</h2>
@@ -78,8 +67,6 @@
       <img src="{% static 'api_catalogo/img/HISTORIA.png' %}" alt="Historia Ferremas" />
     </div>
   </section>
-
-  <!-- FOOTER -->
   <footer id="contacto">
     <div class="footer-container">
       <div class="footer-column"><h4>📍 Dirección</h4><p>Av. Herramienta 123<br>Santiago, Chile</p></div>
@@ -93,8 +80,6 @@
     </div>
     <div class="footer-bottom"><p>&copy; 2025 Ferremas. Todos los derechos reservados.</p></div>
   </footer>
-
-  <!-- JS -->
   <script src="{% static 'api_catalogo/js/catalogo.js' %}"></script>
   <script>
     window.userId = "{{ request.user.nombre|default:'anonimo' }}";

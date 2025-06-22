@@ -7,16 +7,12 @@
   <link rel="stylesheet" href="{% static 'api_catalogo/css/formulario.css' %}">
 </head>
 <body>
-
   <h1>Formulario Producto</h1>
-
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Guardar</button>
   </form>
-
   <a href="{% url 'lista_productos' %}">Volver</a>
-
 </body>
 </html>

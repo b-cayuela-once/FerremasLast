@@ -97,7 +97,11 @@ class ForgotPasswordStaffView(APIView):
                 user.set_password(nueva_pass)
                 user.must_change_password = False  # <-- marcar que ya cambió
                 user.save()
-                return Response({'mensaje': 'Contraseña actualizada'})
+                return Response({
+                    'mensaje': 'Contraseña actualizada',
+                    'tipo_usuario': user.tipo_usuario  # 👈 asegúrate que este campo exista en tu modelo Usuario
+                })
+
 
             except Usuario.DoesNotExist:
                 return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)

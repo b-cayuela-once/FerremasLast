@@ -7,14 +7,11 @@
   <link rel="stylesheet" href="{% static 'api_catalogo/css/confirmar_eliminar.css' %}">
 </head>
 <body>
-
   <h1>¿Estás seguro de eliminar "{{ producto.nombre }}"?</h1>
-
   <form method="post">
     {% csrf_token %}
     <button type="submit">Sí, eliminar</button>
     <a href="{% url 'lista_productos' %}">Cancelar</a>
   </form>
-
 </body>
 </html>

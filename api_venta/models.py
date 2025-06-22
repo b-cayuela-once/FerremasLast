@@ -1,5 +1,8 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.conf import settings
+
 
 class Carrito(models.Model):
     usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='carrito')
@@ -25,7 +28,7 @@ class Pedido(models.Model):
     aprobado = models.BooleanField(null=True)  # None = pendiente, True = aprobado, False = rechazado
     preparado = models.BooleanField(default=False)  # Nuevo campo
     entregado = models.BooleanField(default=False)  # NUEVO CAMPO
-
+    pagado = models.BooleanField(default=False)  # ← Agrega esto
 
     def __str__(self):
         return f"Pedido #{self.id} - {self.usuario.nombre} - ${self.total}"
@@ -40,3 +43,16 @@ class Pedido(models.Model):
             return "Rechazado"
         else:
             return "Listo para " + ("despacho" if self.despacho else "retiro")
+        
+class Pago(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pagos')
+    pedidos = models.ManyToManyField(Pedido)
+    fecha_pago = models.DateTimeField(auto_now_add=True)
+    total_pagado = models.PositiveIntegerField()
+    despacho = models.BooleanField(default=False)
+
+    def __str__(self):
+        # Usa un campo existente en tu modelo Usuario, por ejemplo nombre o email
+        nombre_usuario = getattr(self.usuario, 'nombre', None) or getattr(self.usuario, 'email', 'Usuario desconocido')
+        return f"Pago #{self.id} - Usuario: {nombre_usuario} - Total: ${self.total_pagado}"
+

@@ -40,6 +40,10 @@
         {% endif %}
       </div>
     {% endfor %}
+        <form method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit">Cerrar sesión</button>
+        </form>
   </div>
 {% else %}
   <p class="mensaje-vacio">No hay pedidos aprobados.</p>
