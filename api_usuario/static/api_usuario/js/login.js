@@ -1,46 +1,61 @@
 // ===================================================
-// ENVÍO DEL FORMULARIO DE LOGIN GENERAL
+// 🔐 LOGIN GENERAL PARA USUARIOS (NO STAFF)
 // ===================================================
 
-// Obtiene el evento 'submit' del formulario con ID 'login-form'
+// Escucha el evento 'submit' del formulario con ID 'login-form'
 document.getElementById('login-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Previene el comportamiento por defecto (recarga de página)
 
-    // Obtiene los valores del formulario
+    // -----------------------------------------------
+    // 📝 Obtener datos del formulario
+    // -----------------------------------------------
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
 
-    // Envía una solicitud POST a la API de login
-    const response = await fetch('/api/usuario/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify({ email, password })
-    });
+    try {
+        // -----------------------------------------------
+        // 📡 Enviar solicitud POST a la API para login
+        // -----------------------------------------------
+        const response = await fetch('/api/usuario/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken') // Protección CSRF
+            },
+            body: JSON.stringify({ email, password }) // Enviar datos como JSON
+        });
 
-    // Convierte la respuesta a un objeto JSON
-    const result = await response.json();
-    const message = document.getElementById('message');
+        const result = await response.json(); // Convertir respuesta en JSON
+        const message = document.getElementById('message'); // Elemento para mostrar mensaje
 
-    if (response.ok) {
-        // Si el login fue exitoso
-        message.style.color = 'green';
-        message.textContent = result.mensaje;
+        // ------------------------------------------------
+        // ✅ Si las credenciales son correctas
+        // ------------------------------------------------
+        if (response.ok) {
+            message.style.color = 'green';
+            message.textContent = result.mensaje;
 
-        // Después de mostrar el mensaje, redirigir al login-form después de 1.5 segundos
-        setTimeout(() => {
-            window.location.href = '/api/catalogo/catalogo/';  // Ajusta esta URL a la ruta correcta de tu login
-        }, 1500);
-    } else {
-        // Si hubo un error de autenticación
-        message.style.color = 'red';
-        message.textContent = result.error || "Error al iniciar sesión";
+            // Redirige al catálogo después de 1.5 segundos
+            setTimeout(() => {
+                window.location.href = '/api/catalogo/catalogo/';
+            }, 1500);
+
+        } else {
+            // ❌ Error en las credenciales o respuesta inválida
+            message.style.color = 'red';
+            message.textContent = result.error || "Error al iniciar sesión";
+        }
+
+    } catch (error) {
+        // ⚠️ Error de red o fallo general
+        console.error('Error en el login:', error);
+        document.getElementById('message').textContent = "Error al conectar con el servidor.";
     }
 });
 
-// Función para obtener el CSRF token de la cookie
+// ===================================================
+// 🍪 FUNCIÓN PARA OBTENER EL CSRF TOKEN DESDE LAS COOKIES
+// ===================================================
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
