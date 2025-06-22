@@ -73,10 +73,12 @@
           </div>
         </div>
       {% endfor %}
+      
     </div>
   {% else %}
     <p class="mensaje-vacio">No hay pedidos pendientes.</p>
   {% endif %}
+    <a href="{% url 'vendedor_site' %}" class="back-button">🔙 Volver al Panel de Vendedor</a>
 
 </body>
 </html>
