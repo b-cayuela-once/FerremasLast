@@ -80,7 +80,7 @@ API_VENTA
     * Crear superusuario:
     python manage.py createsuperuser
 
-# TARGETAS.
+# TARJETAS.
 
     * Crédito: 4051 8856 0044 6623
     CVV:123
@@ -91,3 +91,18 @@ API_VENTA
     * Débito: 4051 8842 3993 7763
     Clave:123
     Rut:11.111.111-1
+
+# USUARIOS.
+
+Nombre: UsuarioCliente
+Correo: UsuarioCliente@gmail.com
+Contraseña: UsuarioCliente
+
+Nombre: UsuarioVendedor
+Contraseña: UsuarioVendedor
+
+Nombre: UsuarioBodeguero
+Contraseña: UsuarioBodeguero
+
+Nombre: UsuarioContador
+Contraseña: UsuarioContador
