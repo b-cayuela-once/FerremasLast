@@ -95,16 +95,22 @@ API_WEBPAY
     Rut:11.111.111-1
 
 # USUARIOS.
+- SUPERUSER ADMIN - 
 
-Nombre: UsuarioCliente
-Correo: UsuarioCliente@gmail.com
-Contraseña: UsuarioCliente
+    Nombre: Brandon
+    Contraseña: 21163969-5
 
-Nombre: UsuarioVendedor
-Contraseña: UsuarioVendedor
+- DEMAS USUARIOS- 
 
-Nombre: UsuarioBodeguero
-Contraseña: UsuarioBodeguero
+    Nombre: UsuarioCliente
+    Correo: UsuarioCliente@gmail.com
+    Contraseña: UsuarioCliente
 
-Nombre: UsuarioContador
-Contraseña: UsuarioContador
+    Nombre: UsuarioVendedor
+    Contraseña: UsuarioVendedor
+
+    Nombre: UsuarioBodeguero
+    Contraseña: UsuarioBodeguero
+
+    Nombre: UsuarioContador
+    Contraseña: UsuarioContador
