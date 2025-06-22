@@ -6,6 +6,8 @@ API_USUARIO
 
 API_VENTA
 
+API_WEBPAY
+
 # PREPARAR DIRECTORIO.
 (Antes de clonar el repositorio)
 
@@ -30,7 +32,7 @@ API_VENTA
     git config --global user.email "tunombre@ejemplo.com"
 
     PASO 2.- Clonar repositorio:
-    git clone https://github.com/b-cayuela-once/proyecto0.git
+    git clone https://github.com/b-cayuela-once/FerremasLast.git
 
 # PREPARAR ENTORNO DE TRABAJO.
 
